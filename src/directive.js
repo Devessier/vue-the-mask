@@ -9,11 +9,16 @@ function event (name) {
 }
 
 export default function (el, binding) {
+  if (binding.arg === 'disabled')
+    return
+
   var config = binding.value
+
   if (Array.isArray(config) || typeof config === 'string') {
     config = {
       mask: config,
-      tokens: tokens
+      tokens: tokens,
+      masked: true
     }
   }
 
@@ -59,7 +64,7 @@ export default function (el, binding) {
     el.dispatchEvent(event('input'))
   }
 
-  var newDisplay = masker(el.value, config.mask, true, config.tokens)
+  var newDisplay = masker(el.value, config.mask, config.masked, config.tokens)
   if (newDisplay !== el.value) {
     el.value = newDisplay
     el.dispatchEvent(event('input'))

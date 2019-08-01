@@ -10,7 +10,7 @@ export default function maskit (value, mask, masked = true, tokens) {
     var cValue = value[iValue]
     if (masker && !masker.escape) {
       if (masker.pattern.test(cValue)) {
-      	output += masker.transform ? masker.transform(cValue) : cValue
+        output += masker.transform ? masker.transform(cValue) : cValue
         iMask++
       }
       iValue++
