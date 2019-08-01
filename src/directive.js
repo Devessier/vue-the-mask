@@ -20,6 +20,8 @@ export default function (el, binding) {
       tokens: tokens,
       masked: true
     }
+  } else if (!config.tokens) {
+      config.tokens = tokens
   }
 
   if (el.tagName.toLocaleUpperCase() !== 'INPUT') {
@@ -50,7 +52,7 @@ export default function (el, binding) {
     var position = el.selectionEnd
     // save the character just inserted
     var digit = el.value[position-1]
-    el.value = masker(el.value, config.mask, true, config.tokens)
+    el.value = masker(el.value, config.mask, config.masked, config.tokens)
     // if the digit was changed, increment position until find the digit again
     while (position < el.value.length && el.value.charAt(position-1) !== digit) {
       position++
