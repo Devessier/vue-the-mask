@@ -20,9 +20,12 @@ export default function (el, binding) {
       tokens: tokens,
       masked: true
     }
-  } else if (!config.tokens) {
-      config.tokens = tokens
+  } else if (config.tokens === undefined) {
+    config.tokens = tokens
   }
+
+  if (binding.modifiers['no-masked'] === true)
+    config.masked = false
 
   if (el.tagName.toLocaleUpperCase() !== 'INPUT') {
     var els = el.getElementsByTagName('input')
